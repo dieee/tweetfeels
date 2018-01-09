@@ -131,7 +131,14 @@ class TweetData(object):
         :type start: datetime
         :param end: Query end date.
         :type end: datetime
-        :param binsize: Time duration for each bin for tweet grouping.
+        :param binsize: Time duration for each bin for tweet 
+        
+        
+        
+        
+        
+        
+        ing.
         :type binsize: timedelta
         :param empty: Determines whether empty dataframes will be yielded.
         :type empty: boolean
@@ -143,7 +150,7 @@ class TweetData(object):
         if end is None: end=self.end
         if start == self.start: start = start-second
         df = self.tweet_dates
-        df = df.groupby(pd.TimeGrouper(freq=f'{int(binsize/second)}S')).size()
+        df = df.groupby(pd.Grouper(freq=f'{int(binsize/second)}S')).size()
         df = df[df.index > start - binsize]
         if not empty: df = df[df != 0]
         conn = sqlite3.connect(self._db, detect_types=sqlite3.PARSE_DECLTYPES)
